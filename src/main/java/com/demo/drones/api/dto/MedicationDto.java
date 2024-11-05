@@ -2,6 +2,7 @@ package com.demo.drones.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @Schema(name = "Medication")
+@Builder
 public class MedicationDto {
 
     @Pattern(regexp = "^[a-zA-Z0-9_-]*$", message = "Name can contain only letters, numbers, ‘-‘, ‘_’")
