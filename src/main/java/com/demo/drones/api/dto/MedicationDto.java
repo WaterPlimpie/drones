@@ -1,5 +1,7 @@
 package com.demo.drones.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
@@ -11,7 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @Schema(name = "Medication")
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MedicationDto {
+
+    @Schema(description = "Unique identifier of the medication", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Null(message = "Id must be null")
+    private String id;
 
     @Pattern(regexp = "^[a-zA-Z0-9_-]*$", message = "Name can contain only letters, numbers, ‘-‘, ‘_’")
     @Size(min = 1, max = 100, message = "Name can be at most 100 characters")

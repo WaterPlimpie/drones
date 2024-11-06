@@ -9,7 +9,7 @@ import org.springframework.web.filter.ForwardedHeaderFilter;
 
 @Configuration
 @OpenAPIDefinition(info = @Info(title = "Drone Management API", version = "v1"))
-class OpenApiConfig {
+public class SwaggerConfig {
 
     @Bean
     public ForwardedHeaderFilter forwardedHeaderFilter() {

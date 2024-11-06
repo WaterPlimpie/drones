@@ -1,12 +1,16 @@
 package com.demo.drones.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity(name = "medication")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Medication {
 
     @Id
@@ -23,6 +27,7 @@ public class Medication {
     private String code;
 
     @Column(name = "image")
+    @Lob
     private byte[] image;
 
     @OneToMany(mappedBy = "medication")

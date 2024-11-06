@@ -2,6 +2,7 @@ package com.demo.drones.api;
 
 import com.demo.drones.api.dto.ErrorDto;
 import com.demo.drones.api.dto.MedicationDto;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,6 +24,7 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 @Tag(name = "Medication API", description = "API to manage medications")
 public interface MedicationApi {
 
+    @Operation(summary = "Register a new medication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Medication registered successfully"),
             @ApiResponse(responseCode = "400", description = "Validation error (required data missing)",
@@ -32,7 +34,7 @@ public interface MedicationApi {
     })
     @PostMapping(value = "/", consumes = MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(CREATED)
-    ResponseEntity<Void> registerMedication(@RequestBody
+    ResponseEntity<Void> registerMedication(@ModelAttribute
                                             @Valid
                                             MedicationDto medicationDto);
 
@@ -78,7 +80,7 @@ public interface MedicationApi {
             @PathVariable(name = "medicationId")
             @Parameter(description = "Medication ID")
             String medicationId,
-            @RequestBody
+            @ModelAttribute
             @Valid
             MedicationDto medicationDto);
 
