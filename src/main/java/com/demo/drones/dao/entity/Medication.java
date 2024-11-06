@@ -3,8 +3,6 @@ package com.demo.drones.dao.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Entity(name = "medication")
 @Getter
 @Setter
@@ -29,7 +27,4 @@ public class Medication {
     @Column(name = "image")
     @Lob
     private byte[] image;
-
-    @OneToMany(mappedBy = "medication")
-    private Set<Payload> payloads;
 }

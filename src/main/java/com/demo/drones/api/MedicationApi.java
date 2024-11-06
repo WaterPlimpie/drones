@@ -38,6 +38,7 @@ public interface MedicationApi {
                                             @Valid
                                             MedicationDto medicationDto);
 
+    @Operation(summary = "Get medications")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Medications retrieved successfully"),
             @ApiResponse(responseCode = "500", description = "General server error",
@@ -53,6 +54,7 @@ public interface MedicationApi {
             @Parameter(description = "Starting index of medications to return")
             int from);
 
+    @Operation(summary = "Get medication by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Medication retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Medication not found",
@@ -67,6 +69,7 @@ public interface MedicationApi {
             @Parameter(description = "Medication ID")
             String medicationId);
 
+    @Operation(summary = "Update medication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Medication updated successfully"),
             @ApiResponse(responseCode = "404", description = "Medication not found",
@@ -84,6 +87,7 @@ public interface MedicationApi {
             @Valid
             MedicationDto medicationDto);
 
+    @Operation(summary = "Delete medication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Medication deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Medication not found",

@@ -78,6 +78,20 @@ public class MedicationService {
         medicationRepository.deleteById(medicationId);
     }
 
+    protected Double getMedicationWeight(String medicationId) {
+        log.info("Getting medication weight: {}", medicationId);
+
+        if (!medicationRepository.existsById(medicationId)) {
+            throw new EntityNotFoundException(NOT_FOUND_MESSAGE.formatted(medicationId));
+        }
+        return medicationRepository.getWeightById(medicationId);
+    }
+
+    protected Medication getEntity(String medicationId) {
+        return medicationRepository.findById(medicationId)
+                .orElseThrow(() -> new EntityNotFoundException(NOT_FOUND_MESSAGE.formatted(medicationId)));
+    }
+
     private MedicationDto toDto(Medication medication) {
         return MedicationDto.builder()
                 .code(medication.getCode())

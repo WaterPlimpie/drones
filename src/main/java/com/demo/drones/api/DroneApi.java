@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.demo.drones.api.ApiConstants.BASE_PATH;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping(BASE_PATH + "/drones")
@@ -65,7 +64,7 @@ public interface DroneApi {
     @GetMapping(value = "/", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
     ResponseEntity<List<DroneDto>> getDrones(
-            @RequestParam(name = "available", required = false, defaultValue = "false")
+            @RequestParam(name = "availableOnly", required = false, defaultValue = "false")
             @Parameter(description = "Filter drones by availability")
             boolean available,
             @RequestParam(name = "size", required = false, defaultValue = "10")
@@ -124,5 +123,20 @@ public interface DroneApi {
             @RequestBody
             @Valid
             PayloadDto payloadDto);
+
+    @Operation(summary = "Delete a drone", description = "Delete a drone by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Drone deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Drone not found",
+                    content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorDto.class))),
+            @ApiResponse(responseCode = "500", description = "General server error",
+                    content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorDto.class)))
+    })
+    @DeleteMapping(value = "/{droneId}", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(NO_CONTENT)
+    ResponseEntity<Void> deleteDrone(
+            @PathVariable(name = "droneId")
+            @Parameter(description = "Drone ID")
+            String droneId);
 
 }

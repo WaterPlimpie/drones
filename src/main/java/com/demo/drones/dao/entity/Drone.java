@@ -1,12 +1,14 @@
 package com.demo.drones.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-
-import java.util.Set;
+import lombok.*;
 
 @Entity(name = "drone")
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Drone {
 
     @Id
@@ -28,6 +30,8 @@ public class Drone {
     @Column(name = "state")
     private String state;
 
-    @OneToMany(mappedBy = "drone")
-    private Set<Payload> payloads;
+    @ManyToOne
+    @JoinColumn(name = "medication_id", referencedColumnName = "id")
+    private Medication medication;
+
 }

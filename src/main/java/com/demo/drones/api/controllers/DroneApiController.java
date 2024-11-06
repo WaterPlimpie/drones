@@ -38,8 +38,8 @@ public class DroneApiController implements DroneApi {
     }
 
     @Override
-    public ResponseEntity<List<DroneDto>> getDrones(boolean available, int size, int from) {
-        var drones = droneService.getDrones(available, size, from);
+    public ResponseEntity<List<DroneDto>> getDrones(boolean availableOnly, int size, int from) {
+        var drones = droneService.getDrones(availableOnly, size, from);
         return ResponseEntity.ok(drones);
     }
 
@@ -58,6 +58,12 @@ public class DroneApiController implements DroneApi {
     @Override
     public ResponseEntity<Void> loadDrone(String droneId, PayloadDto payloadDto) {
         droneService.loadDrone(droneId, payloadDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteDrone(String droneId) {
+        droneService.deleteDrone(droneId);
         return ResponseEntity.noContent().build();
     }
 }
