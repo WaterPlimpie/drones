@@ -26,10 +26,10 @@ public class DroneDto {
     @Schema(description = "Weight limit of the drone in grams")
     private Double weightLimit = 500.0;
 
-    @Max(value = 100, message = "Battery capacity can be at most 100%")
+    @Max(value = 200000, message = "Battery capacity can be at most 200000 volts")
     @Builder.Default
-    @Schema(description = "Battery capacity of the drone in percentage")
-    private Double batteryCapacity = 100.0;
+    @Schema(description = "Battery capacity of the drone in volts")
+    private Integer batteryCapacity = 10000;
 
     @Builder.Default
     @Schema(description = "Current state of the drone", requiredMode = Schema.RequiredMode.NOT_REQUIRED, defaultValue = "IDLE", example = "IDLE")

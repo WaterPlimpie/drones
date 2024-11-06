@@ -14,8 +14,21 @@ import java.util.List;
 public class PayloadDto {
 
     @Schema(description = "Payload of the drone")
-    private List<MedicationDto> medications;
+    private List<Item> medications;
 
-    @Schema(description = "Total weight of the payload")
+    @Schema(description = "Total weight of the payload", hidden = true)
     private Double totalWeight;
+
+    @Getter
+    @Setter
+    @Builder
+    @Schema(name = "PayloadItem")
+    public static class Item {
+
+        @Schema(description = "Medication ID")
+        private String medicationId;
+
+        @Schema(description = "Medication count")
+        private Integer count;
+    }
 }

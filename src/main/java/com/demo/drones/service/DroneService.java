@@ -2,7 +2,6 @@ package com.demo.drones.service;
 
 import com.demo.drones.api.dto.DroneChargeDto;
 import com.demo.drones.api.dto.DroneDto;
-import com.demo.drones.api.dto.MedicationDto;
 import com.demo.drones.api.dto.PayloadDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -54,9 +53,9 @@ public class DroneService {
         // return dummy payload
         return PayloadDto.builder()
                 .medications(List.of(
-                        MedicationDto.builder()
-                                .name("Medication 1")
-                                .weight(1.0)
+                        PayloadDto.Item.builder()
+                                .medicationId("123")
+                                .count(1)
                                 .build())
                 ).build();
     }
